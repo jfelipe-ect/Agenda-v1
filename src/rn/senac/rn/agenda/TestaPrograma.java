@@ -23,11 +23,29 @@ public class TestaPrograma {
 
         bancoDeDados.salva(filipe);
 
-        List<Contato> contatos = bancoDeDados.buscaTodos();
+        Contato michele1 = new Contato("Michele Gebara", "8888-6666");
 
-        for (Contato contato : contatos){
+        for (Contato contato : bancoDeDados.buscaTodos()){
             System.out.println(contato.getId() + " - " + contato.getNome());
         }
+
+        Contato filipeNovo = bancoDeDados.buscaPeloNome("Filipe Pontes");
+        filipeNovo.setNome("Filipe Mengão");
+
+        bancoDeDados.edita(filipeNovo);
+
+        System.out.println("==============================================");
+
+        for (Contato contato : bancoDeDados.buscaTodos()){
+            System.out.println(contato.getId() + " - " + contato.getNome());
+        }
+
+
+
+
+
+
+
 
     }
 
