@@ -30,19 +30,49 @@ public class ContatoView {
                 case 3:
                     ContatoView.buscarPeloNome();
                     break;
+                case 4:
+                    ContatoView.editarContato();
+                    break;
             }
 
         } while (escolha > 5 || escolha < 0);
 
     }
 
-    private static void buscarPeloNome() {
-        System.out.println("Digite o nome: ");
+    private static void editarContato() {
+        System.out.println("Informe o nome do contato desejado: ");
         String nome = entrada.next();
-            repository.buscaPeloNome(nome);
+        Contato contato = repository.buscaPeloNome(nome);
+        if (contato == null) {
+            System.out.println("Contato não existe");
+        } else {
+            System.out.println("Deseja alterar o nome? (s ou n)");
+            String respostaNome = entrada.next();
+            if (respostaNome.equals("s")){
+                System.out.println("Informe o novo nome: ");
+                String novoNome = entrada.next();
+                contato.setNome(novoNome);
+            }
+            System.out.println("Deseja alterar o fone? ");
+            String novoFone = entrada.next();
+            contato.setFone(novoFone);
+        }
+        repository.edita(contato);
+    }
 
-        String textoSaida = "* " + id + " | " + nome + " | " + fone + " *";
-            System.out.println(textoSaida);
+    private static void buscarPeloNome() {
+        System.out.println("Informe o nome do contato desejado: ");
+        String nome = entrada.next();
+        Contato contato = repository.buscaPeloNome(nome);
+        if (contato == null) {
+            System.out.println("Contato não existe");
+        } else {
+            String id = contato.getId().toString();
+            String nomeContato = contato.getNome();
+            String fone = contato.getFone();
+            String resposta = "* " + id + " | " + nome + " | " + fone + " *";
+            System.out.println(resposta);
+        }
 
     }
 
@@ -71,7 +101,7 @@ public class ContatoView {
         menu += "============================================== \n";
         menu += "1 - Cadastrar Novo Contato                     \n";
         menu += "2 - Listar Todos os Contatos                   \n";
-        menu += "3 - Buscar Contato  pelo Nome                  \n";
+        menu += "3 - Buscar Contato pelo Nome                   \n";
         menu += "4 - Editar um Contato                          \n";
         menu += "5 - Excluir um Contato                         \n";
         menu += "0 - SAIR                                       \n";
