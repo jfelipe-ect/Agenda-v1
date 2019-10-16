@@ -1,21 +1,17 @@
 package br.senac.rn.agenda.config;
 
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-
 public class AgendaApplicationConfig implements WebMvcConfigurer {
 
     @Override
-    public void addCorsMappings(CorsRegistry registry){
+    public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://a9261814-agenda-front.herokuapp.com/")
+                .allowedOrigins("https://a9261848-agenda-ui.herokuapp.com")
                 .allowedMethods("GET", "POST");
     }
-
-
 
 }
